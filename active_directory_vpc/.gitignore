@@ -1,0 +1,35 @@
+
+# .gitignore for Terraform projects
+
+# Local .terraform directories
+**/.terraform/
+
+# Terraform plan output files
+*.tfplan
+
+# Environment-specific override files
+*.auto.tfvars
+
+# Crash log files
+crash.log
+
+# Exclude sensitive variable files
+*.tfvars
+*.tfvars.json
+*.tfvars.tf
+
+# Exclude backend configuration files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Exclude provider plugin files
+terraform-provider-*
+
+# Exclude override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Exclude CLI configuration file
+.terraformrc
