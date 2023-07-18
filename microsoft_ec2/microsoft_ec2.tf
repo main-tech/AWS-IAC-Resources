@@ -102,4 +102,7 @@ resource "aws_instance" "microsoft_ec2" {
     Name = "Microsoft EC2 Instance"
   }
 }
-
+# Assign Elastic IP address to the EC2 instance
+resource "aws_eip" "elastic_ip" {
+  instance = aws_instance.microsoft_ec2.id
+}
