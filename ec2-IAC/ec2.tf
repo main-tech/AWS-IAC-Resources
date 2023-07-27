@@ -6,6 +6,12 @@ variable "existing_key_pair1" {
 variable "ami_id" {
   type = string
 }
+variable "instance_type" {
+  type = string
+}
+variable "availability_zone" {
+  type = string
+}
 
 # Define provider and region
 provider "aws" {
@@ -25,7 +31,7 @@ resource "aws_vpc" "server_vpc" {
 resource "aws_subnet" "public_subnet" {
   vpc_id            = aws_vpc.server_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = var.availability_zone
 
   tags = {
     Name = "Public Subnet"
@@ -69,7 +75,7 @@ resource "aws_security_group" "ec2_security_group" {
   vpc_id      = aws_vpc.server_vpc.id
   description = "Security group for  Server"
 
- ingress {
+  ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
@@ -108,8 +114,8 @@ data "aws_key_pair" "key_pair1" {
 
 # Create the EC2 instance in the public subnet
 resource "aws_instance" "ec2" {
-  ami                    = var.ami_id 
-  instance_type          = "t2.micro"
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
   key_name               = var.existing_key_pair1
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
