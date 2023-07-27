@@ -12,6 +12,9 @@ variable "instance_type" {
 variable "availability_zone" {
   type = string
 }
+variable "volume_size" {
+  type = number
+}
 
 # Define provider and region
 provider "aws" {
@@ -120,6 +123,10 @@ resource "aws_instance" "ec2" {
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
 
+  root_block_device {
+    volume_size           = var.volume_size
+    delete_on_termination = true
+  }
   tags = {
     Name = "ec2_instacne"
   }
