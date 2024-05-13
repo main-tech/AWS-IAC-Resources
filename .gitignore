@@ -5,7 +5,7 @@
 
 # Terraform plan output files
 *.tfplan
-
+backend.tf
 # Environment-specific override files
 *.auto.tfvars
 

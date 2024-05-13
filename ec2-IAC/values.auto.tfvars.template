@@ -1,0 +1,5 @@
+existing_key_pair1 = "key-pair-name-to-use"
+ami_id             = "ami-04b70fa74e45c3917"
+instance_type      = "t2.medium"
+availability_zone  = "us-east-1a"
+volume_size        = 30
